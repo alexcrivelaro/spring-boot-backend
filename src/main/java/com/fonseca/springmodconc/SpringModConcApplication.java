@@ -15,9 +15,9 @@ import com.fonseca.springmodconc.repositories.ProdutoRepository;
 @SpringBootApplication
 public class SpringModConcApplication implements CommandLineRunner {
 	
-	@Autowired
+	@Autowired 
 	private CategoriaRepository categoriaRepository;
-	@Autowired
+	@Autowired 
 	private ProdutoRepository produtoRepository;
 
 	public static void main(String[] args) {

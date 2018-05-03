@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.fonseca.springmodconc.domain.Categoria;
+import com.fonseca.springmodconc.dto.CategoriaDTO;
 import com.fonseca.springmodconc.repositories.CategoriaRepository;
 import com.fonseca.springmodconc.services.exceptions.DataIntegrityException;
 import com.fonseca.springmodconc.services.exceptions.ObjectNotFoundException;
@@ -58,5 +59,9 @@ public class CategoriaService {
 		PageRequest pageRequest = new PageRequest(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
  	}
+	
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
+	}
 }  
   

@@ -7,7 +7,7 @@
 	<groupId>com.fonseca.springmodconc</groupId>
 	<artifactId>SpringModConc</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>SpringModConc</name>
 	<description>Modelagem Conceitual com UML</description>

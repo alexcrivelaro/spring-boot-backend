@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.fonseca.springmodconc.domain.Categoria;
 import com.fonseca.springmodconc.domain.Pedido;
-import com.fonseca.springmodconc.dto.CategoriaDTO;
 import com.fonseca.springmodconc.services.PedidoService;
 
 @RestController

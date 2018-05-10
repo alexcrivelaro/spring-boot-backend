@@ -20,6 +20,7 @@ import com.fonseca.springmodconc.domain.PagamentoComCartao;
 import com.fonseca.springmodconc.domain.Pedido;
 import com.fonseca.springmodconc.domain.Produto;
 import com.fonseca.springmodconc.domain.enums.EstadoPagamento;
+import com.fonseca.springmodconc.domain.enums.Perfil;
 import com.fonseca.springmodconc.domain.enums.TipoCliente;
 import com.fonseca.springmodconc.repositories.CategoriaRepository;
 import com.fonseca.springmodconc.repositories.CidadeRepository;
@@ -114,17 +115,22 @@ public class DBService {
 		estadoRepository.save(Arrays.asList(est1, est2));
 		cidadeRepository.save(Arrays.asList(c1, c2, c3));		
 		
-		Cliente cli1 = new Cliente(null, "Maria Silva", "alexcrivelar@gmail.com", "12312312312", TipoCliente.PESSOAFISICA, pe.encode("123"));
-		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "alexcrivelar@gmail.com", "63823518810", TipoCliente.PESSOAFISICA, pe.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("45456565", "989745455"));
 		
-		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Ap 33", "Jardim", "05033001", cli1, c1);
-		Endereco e2 = new Endereco(null, "Rua Pequis", "26", "Ap 22", "Vila", "05144000", cli1, c2);
+		Cliente cli2 = new Cliente(null, "Ana Costa", "maryfonseca12@gmail.com", "69646966284", TipoCliente.PESSOAFISICA, pe.encode("123"));
+		cli1.getTelefones().addAll(Arrays.asList("65465487", "988724497"));
+		cli2.addPerfil(Perfil.ADMIN);
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Ap 33", "Perdizes", "05033001", cli1, c1);
+		Endereco e2 = new Endereco(null, "Rua Pequis", "26", "Ap 22", "Sumaré", "05144000", cli1, c2);
+		Endereco e3 = new Endereco(null, "Rua Gomes", "34", "Ap 28", "Pirituba", "05142000", cli2, c2);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 		
-		clienteRepository.save(Arrays.asList(cli1));
-		enderecoRepository.save(Arrays.asList(e1, e2));
+		clienteRepository.save(Arrays.asList(cli1, cli2));
+		enderecoRepository.save(Arrays.asList(e1, e2, e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		

@@ -3,8 +3,12 @@ package com.fonseca.springmodconc.services;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.fonseca.springmodconc.domain.Cliente;
 import com.fonseca.springmodconc.domain.ItemPedido;
 import com.fonseca.springmodconc.domain.PagamentoComBoleto;
 import com.fonseca.springmodconc.domain.Pedido;
@@ -14,6 +18,8 @@ import com.fonseca.springmodconc.repositories.ItemPedidoRepository;
 import com.fonseca.springmodconc.repositories.PagamentoRepository;
 import com.fonseca.springmodconc.repositories.PedidoRepository;
 import com.fonseca.springmodconc.repositories.ProdutoRepository;
+import com.fonseca.springmodconc.security.UserSS;
+import com.fonseca.springmodconc.services.exceptions.AuthorizationException;
 import com.fonseca.springmodconc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -72,5 +78,20 @@ public class PedidoService {
 		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	} 
+	
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = new PageRequest(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Cliente cliente = clienteRepository.findOne(user.getId());
+		return repo.findByCliente(cliente, pageRequest);
+	}
 }
-  
+
+
+
+
+
+

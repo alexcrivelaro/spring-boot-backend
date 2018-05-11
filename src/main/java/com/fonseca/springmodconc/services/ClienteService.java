@@ -13,12 +13,15 @@ import org.springframework.stereotype.Service;
 import com.fonseca.springmodconc.domain.Cidade;
 import com.fonseca.springmodconc.domain.Cliente;
 import com.fonseca.springmodconc.domain.Endereco;
+import com.fonseca.springmodconc.domain.enums.Perfil;
 import com.fonseca.springmodconc.domain.enums.TipoCliente;
 import com.fonseca.springmodconc.dto.ClienteDTO;
 import com.fonseca.springmodconc.dto.ClienteNewDTO;
 import com.fonseca.springmodconc.repositories.CidadeRepository;
 import com.fonseca.springmodconc.repositories.ClienteRepository;
 import com.fonseca.springmodconc.repositories.EnderecoRepository;
+import com.fonseca.springmodconc.security.UserSS;
+import com.fonseca.springmodconc.services.exceptions.AuthorizationException;
 import com.fonseca.springmodconc.services.exceptions.DataIntegrityException;
 import com.fonseca.springmodconc.services.exceptions.ObjectNotFoundException;
 
@@ -38,6 +41,12 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user==null || user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw  new AuthorizationException("Acesso negado");
+		}
+		
 		Cliente obj = repo.findOne(id);
 		if (obj == null) {
 			throw new ObjectNotFoundException("Onjeto não encontrado! Id: " + id

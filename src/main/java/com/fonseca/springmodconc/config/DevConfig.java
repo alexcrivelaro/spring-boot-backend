@@ -33,8 +33,8 @@ public class DevConfig {
 		return true;
 	}
 	
-	@Bean EmailService emailService() {
+	@Bean 
+	public EmailService emailService() {
 		return new SmtpEmailService();
 	}
 } 
- 

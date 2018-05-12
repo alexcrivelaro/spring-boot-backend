@@ -80,7 +80,7 @@ public class DBService {
 		Produto p11 = new Produto(null, "Shampoo", 90.00);
 		
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		cat2.getProdutos().addAll(Arrays.asList(p2));
+		cat2.getProdutos().addAll(Arrays.asList(p2, p4));
 		cat3.getProdutos().addAll(Arrays.asList(p5, p6));
 		cat4.getProdutos().addAll(Arrays.asList(p1, p2, p3, p7));
 		cat5.getProdutos().addAll(Arrays.asList(p8));
@@ -106,8 +106,8 @@ public class DBService {
 		Estado est2 = new Estado(null, "São Paulo");
 		
 		Cidade c1 = new Cidade(null, "Uberlândia", est1);
-		Cidade c2 = new Cidade(null, "Sâo Paulo", est2);
-		Cidade c3 = new Cidade(null, "CAmpinas", est2);
+		Cidade c2 = new Cidade(null, "São Paulo", est2);
+		Cidade c3 = new Cidade(null, "Campinas", est2);
 		
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2, c3));

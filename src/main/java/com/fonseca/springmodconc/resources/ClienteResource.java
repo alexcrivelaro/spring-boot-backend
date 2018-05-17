@@ -86,5 +86,4 @@ public class ClienteResource {
 		URI uri = service.uploadProfilePicture(file);
 		return ResponseEntity.created(uri).build();
 	}
-	
 }
